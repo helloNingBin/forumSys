@@ -14,11 +14,7 @@ Chat.connect = (function(host) {
 	}
 
 	Chat.socket.onopen = function() {
-		//Console.log('Info: WebSocket connection opened.');
-		$('.footer p').click(function(){
-			send(path + "images/touxiangm.png",$(this).prev().val(),false);
-			Chat.sendMessage();
-		})
+		// Console.log('Info: WebSocket connection opened.');
 	};
 
 	Chat.socket.onclose = function() {
@@ -28,7 +24,7 @@ Chat.connect = (function(host) {
     //接收信息
 	Chat.socket.onmessage = function(message) {
  		var msg = eval('(' + message.data + ')');
-		receive(path + "images/touxiangm.png",msg.content,false);
+ 		$("#selectDataFrame")[0].contentWindow.receive(path + "images/touxiangm.png",msg.content,false);
 		//Console.log(message.data);
 	};
 });
@@ -44,25 +40,10 @@ Chat.initialize = function() {
 };
 //发送信息
 Chat.sendMessage = (function() {
-	var message = getSendMsg();
+	var message = $("#selectDataFrame")[0].contentWindow.getSendMsg();
 	Chat.socket.send(JSON.stringify(message));
-	$("#msgContent").val("");
+	$("#selectDataFrame").contents().find("#msgContent").val("");
 });
 $(function(){
 	Chat.initialize();
 });
-/*
- * 发送信息的内容(json格式)
- * fromId,toId,content
- * 
- */
-function getSendMsg(){
-	var content = $("#msgContent").val();
-	var toId = $(".chat_popup").attr("toId");
-	var data = {
-		"content" : content,
-		"fromId" : memberId,
-		"toId" : toId
-	}
-	return data;
-}

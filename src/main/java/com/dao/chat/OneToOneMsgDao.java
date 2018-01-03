@@ -3,9 +3,11 @@
  */
 package com.dao.chat;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Repository;
 
 import com.base.dao.BaseDao;
@@ -39,5 +41,14 @@ public class OneToOneMsgDao extends BaseDao<OneToOneMsg, Long> implements IBaseD
 		query.setMaxResults(page.getLimit());
 		return query.list();
 	}
-    
+    public void test(){
+    	System.out.println(get(2L));
+    }
+    public void update(){
+    	/*String hql = "update DB_ONETOONEMSG set content = 'cccccccccc' where fromId = 1002";
+    	Query query = super.getSession().createSQLQuery(hql);
+    	query.executeUpdate();*/
+    	System.out.println(get(1L));
+    	System.out.println(get(2L));
+    }
 }

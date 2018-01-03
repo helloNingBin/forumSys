@@ -26,7 +26,7 @@ public class LoginTraceInterceptor extends HandlerInterceptorAdapter{
     String contextPath = request.getContextPath();
     String url = requestUri.substring(contextPath.length());
     String loginIp = request.getRemoteAddr();
-    log.info("==============进入LoginTraceInterceptor拦截器================:" + url);
+//    log.info("==============进入LoginTraceInterceptor拦截器================:" + url);
     Long memberId = (Long)request.getSession().getAttribute("LOGIN_MEMBER_ID_SESSION_KEY");
 /*    LoginTrace loginTrace = new LoginTrace(memberId == null ? -1L : memberId.longValue(), url, loginIp,HttpUtils.mapToString(request.getParameterMap()));
     memberServiceInterface.saveLogin(loginTrace);*/
@@ -34,10 +34,10 @@ public class LoginTraceInterceptor extends HandlerInterceptorAdapter{
   }
 
   public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)throws Exception{
-	  System.out.println("LoginTraceInterceptor-------->postHandle");
+//	  System.out.println("LoginTraceInterceptor-------->postHandle");
   }
 
   public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)throws Exception{
-	  System.out.println("afterCompletion-------->postHandle");
+//	  System.out.println("afterCompletion-------->postHandle");
   }
 }

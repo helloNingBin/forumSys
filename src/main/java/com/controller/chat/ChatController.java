@@ -10,15 +10,18 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.base.controller.BaseController;
 import com.base.entity.Page;
+import com.entity.Member;
 import com.entity.chat.OneToOneMsg;
 import com.exception.ChatException;
 import com.service.chat.WebSocketServiceInterface;
+import com.service.member.MemberServiceInterface;
 import com.utils.CommConstant;
 
 /**
@@ -32,6 +35,8 @@ public class ChatController extends BaseController{
 	private static Logger log = Logger.getLogger(ChatController.class);
 	@Autowired
 	private WebSocketServiceInterface webService;
+	@Autowired
+	private MemberServiceInterface memberService;
 	
 	@RequestMapping(value="/getMsg")
 	@ResponseBody
@@ -55,5 +60,17 @@ public class ChatController extends BaseController{
 		}
 		
 		return map;
+	}
+	@RequestMapping("/toChatWindow")
+	public String toChatWindow(Model model,long toMemberId){
+		try {
+			Member member = memberService.get(toMemberId);
+			model.addAttribute("toMember", member);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error(e.getMessage(), e);
+			return null;
+		}
+		return "chat/talkWindow";
 	}
 }

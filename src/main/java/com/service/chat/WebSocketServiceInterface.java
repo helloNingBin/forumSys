@@ -31,4 +31,8 @@ public interface WebSocketServiceInterface extends BaseServiceInterface<OneToOne
 	 * @return 聊天记录
 	 */
 	List<OneToOneMsg> getOneMsg(Page page,long memberId,long firendMemberId)throws ChatException,Exception;
+	/**
+	 * 
+	 */
+	void test();
 }

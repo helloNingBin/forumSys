@@ -5,9 +5,9 @@
 <head>
 <%@ include file="/WEB-INF/public/header.jsp"%>
 <title>主页</title>
-<link rel="stylesheet" type="text/css" href="${REQUEST_BASE_PATH}css/public.css">
-<link rel="stylesheet" type="text/css" href="${REQUEST_BASE_PATH}css/swiper.css">
-<link rel="stylesheet" type="text/css" href="${REQUEST_BASE_PATH}css/poput.css" />
+<link rel="stylesheet" type="text/css" href="${REQUEST_BASE_PATH}css/public.css?ver=7">
+<link rel="stylesheet" type="text/css" href="${REQUEST_BASE_PATH}css/swiper.css?ver=7">
+<link rel="stylesheet" type="text/css" href="${REQUEST_BASE_PATH}css/poput.css?ver=7" />
 <script src="${REQUEST_BASE_PATH}js/swiper.js"></script>
 <script src="${REQUEST_BASE_PATH}js/simpler-sidebar.min.js"></script>
 <script src="${REQUEST_BASE_PATH}/js/chat/chatIndex.js?ver=71"></script>
@@ -268,13 +268,16 @@
 		</ul>
 </div>
 <div class="popup_bg"></div>
-<%@include file="/WEB-INF/chat/talkWindow.jsp"%>
+<div id="selectData" class="cp_popup_modulat" >
+    <iframe id="selectDataFrame"  frameborder="0" scrolling="no" width="100%" height="100%" ></iframe>
+</div>
 <script>
 $(".group_tit").click(function(){
 	$(this).parent().toggleClass("cheg");
 	});
 $(function() {
-$("#toggle-sidebar").click(function(){
+	$("#selectData").css("height",$(window).height());
+    $("#toggle-sidebar").click(function(){
 	$("#dowebok").addClass("block");
 	});
 	$('#dowebok').simplerSidebar({
@@ -321,18 +324,6 @@ $("#toggle-sidebar").click(function(){
 			}	
 		}
 	}
-	var flag = true;
-	$(function(){
-		$(".chat_popup").css("height",$(".chat_popup").height());//聊天的弹出框与window窗口高度保持一致
-		//聊天界面内容的固定高度
-		$(".chat_popup").scroll(function() {
-	    	var chatHeight = $(".chat_popup").height() - $(".header").height() - $(".footer").height();
-			if($(".chat_popup").scrollTop() < 0.5 && flag){
-				flag = false;
-			    getMsg($(".chat_popup").attr("toId"),$("#minId").val());
-			 }
-			});
-	})
 </script>
 </body>
 </html>

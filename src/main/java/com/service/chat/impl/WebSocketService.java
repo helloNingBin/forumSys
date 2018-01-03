@@ -32,8 +32,7 @@ public class WebSocketService extends BaseDao<OneToOneMsg, Long> implements WebS
 	@Override
 	public void updateChatTx(OneToOneMsg msg, Map<String, Object> data)throws ChatException, Exception {
 		// 保存聊天数据
-		this.save(msg);
-		
+ 		this.save(msg);
 	}
 
 	@Override
@@ -44,5 +43,10 @@ public class WebSocketService extends BaseDao<OneToOneMsg, Long> implements WebS
 			throw new ChatException("对方不是你的好友！请刷新页面再试");
 		}
 		return WebSocketUtils.orderOneToOneMsg(dao.getOneMsg(page,memberId,firendMemberId));
+	}
+
+	@Override
+	public void test() {
+		dao.test();
 	}
 }

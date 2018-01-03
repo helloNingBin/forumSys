@@ -66,7 +66,7 @@ body{
 
 .footer{
 	position: fixed;
-	bottom: -200px;
+	bottom: 0px;
     height:1rem;
     background-color:#fff;
     line-height:1rem;

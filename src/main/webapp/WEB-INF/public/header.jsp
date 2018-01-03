@@ -10,16 +10,19 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-touch-fullscreen" content="yes">
 <%
-String path = request.getContextPath();  
-String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";  
+String contextPath = request.getContextPath(); 
+pageContext.setAttribute("contextPath", contextPath + "/");
+String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + contextPath + "/";  
 pageContext.setAttribute("basePath", basePath);
 Object memberId = session.getAttribute(CommConstant.LOGIN_MEMBER_ID_SESSION_KEY);
 //webSocket基本路径
-String wsPath = request.getServerName() + ":" + request.getServerPort() + path + "/";
+String wsPath = request.getServerName() + ":" + request.getServerPort() + contextPath + "/";
 %>
-<script type="text/javascript" src="${REQUEST_BASE_PATH}js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
    var path = '<%=basePath%>';
    var memberId = '<%=memberId%>';
    var wsPath = '<%=wsPath%>';
+   var contextPath = '<%=contextPath%>' + '/';
 </script>
+<script type="text/javascript" src="${REQUEST_BASE_PATH}js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="${REQUEST_BASE_PATH}js/public.js"></script>

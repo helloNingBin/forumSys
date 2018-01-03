@@ -11,7 +11,7 @@ function receive(headSrc,str,isHistory,time){
 }
 /*发送消息*/
 function send(headSrc,str,isHistory,time){
-	if(time != ''){
+	if(time != undefined && time != ''){
 		time = "<div class='time'>" + time + "</div>";
 	}else{
 		time = '';
