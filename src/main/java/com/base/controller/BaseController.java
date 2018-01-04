@@ -12,8 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-public class BaseController
-{
+public class BaseController{
   protected HttpServletRequest request;
   protected HttpServletResponse response;
   protected HttpSession session;
@@ -37,27 +36,22 @@ public class BaseController
     return JSONUtils.setErrorMsg(msg);
   }
 
-  protected Member getLoginMember()
-  {
+  protected Member getLoginMember(){
     return (Member)this.session.getAttribute(CommConstant.LOGIN_MEMBER);
   }
 
-  protected String getLoginMemberId()
-  {
+  protected String getLoginMemberId(){
     Object tid = this.session.getAttribute(CommConstant.LOGIN_MEMBER_ID_SESSION_KEY);
     return tid == null ? null : tid.toString();
   }
 
-  protected String getLoginUserId()
-  {
+  protected String getLoginUserId(){
     Object tid = this.session.getAttribute("");
     return tid == null ? null : tid.toString();
   }
 
-  protected void toErrorPage(String code, String msg)
-  {
-    try
-    {
+  protected void toErrorPage(String code, String msg){
+    try{
       if (isMobileBrowser()) {
         if (StringUtils.isNotBlank(code)) {
           if ("404".equals(code))
@@ -84,8 +78,7 @@ public class BaseController
     }
   }
 
-  private boolean isMobileBrowser()
-  {
+  private boolean isMobileBrowser(){
     String userAgent = this.request.getHeader("user-agent");
     if (StringUtils.isNotBlank(userAgent)) {
       int isMObrowser = userAgent.indexOf("Mobile");
@@ -94,10 +87,8 @@ public class BaseController
     return false;
   }
 
-  protected void toResultPage(String title, String msg, Boolean state)
-  {
-    try
-    {
+  protected void toResultPage(String title, String msg, Boolean state){
+    try{
       if (StringUtils.isBlank(title))
         title = state.booleanValue() ? "提交成功" : state == null ? "提示信息" : "提交失败";
       this.request.setAttribute("title", title);
